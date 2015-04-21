@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+    
+	<!-- Root Context: defines shared resources visible to all other web components -->
+<!-- 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:testDB"/>
+	<property name="username" value="test"/>
+	<property name="password" value="oracle"/> 
+		
+	</bean> -->
+	
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:testDB"/>
+	<property name="username" value="test"/>
+	<property name="password" value="oracle"/> 
+		
+	</bean> 
+	
+<!-- 	 SqlSessionFactory설정 --> 
+
+    <bean id="sqlSessionFactory"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" 
+                value="classpath*:com/test/jdbc/mapper/*.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.test.jdbc.dto"/>
+    </bean>      
+  
+    <!-- SqlSessionTemplate설정 -->
+    <bean id="sqlSessionTemplate" 
+            class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+    
+    	<bean id="boardDaoImpl" class="com.test.jdbc.dao.BoardDaoImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate" />
+    </bean>
+      
+    
+ <!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <aop:config>
+	<aop:pointcut expression="within(com.test.jdbc.dao..*)" id="transactionPointcut"/>
+	<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut"/>
+    </aop:config>
+    
+    -->
+    
+<!--       AOP    --> 
+    <!-- <bean id="logAop1" class="com.test.jdbc.aop.LogAop"></bean>
+    
+    <aop:config proxy-target-class="true">
+    	<aop:aspect id="logger" ref="logAop1">
+    		<aop:pointcut expression="execution(public * *(..))" id="publicM"/>
+    		<aop:around method="loggerAop" pointcut-ref="publicM"/>    		
+    	</aop:aspect>
+    </aop:config> 
+     -->
+    
+ 		<!-- 이거적용시킬수있을까... -->
+<!-- 		<tx:annotation-driven />
+		
+		<aop:config>
+			<aop:advisor pointcut="execution(* com.test.controller.*.*(..))" advice-ref="transactionAdvice" />
+		</aop:config>
+		
+		<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+			<tx:attributes>
+				<tx:method name="exceptionPut" propagation="REQUIRES_NEW" />
+				<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+				<tx:method name="*" />
+			</tx:attributes>
+		</tx:advice>
+		
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+     -->
+     <!-- 00000000000000000000000000000000000000000000000000000 -->
+</beans>

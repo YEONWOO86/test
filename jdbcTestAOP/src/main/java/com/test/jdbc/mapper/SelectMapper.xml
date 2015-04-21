@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.jdbc.mapper.SelectMapper">
+    <select id="listAll" resultType="com.test.jdbc.dto.BDto">
+        select * from board_test
+    </select>
+    
+    <insert id="write" parameterType="com.test.jdbc.dto.BDto">
+    	insert into board_test(bName,bTitle,bContent)
+    	 values(#{bName},#{bTitle},#{bContent})
+    </insert>
+    
+    <delete id="delete" parameterType="String">
+    	delete from board_test where bName=#{bName}
+    </delete>
+    
+    <update id="update" parameterType="com.test.jdbc.dto.BDto">
+		update board_test set bTitle=#{bTitle},bContent=#{bContent}
+		where bName =#{bName }
+	</update>
+	
+	<update id="readcountup" parameterType="String">
+		update board set mvc_board_seq=#{mvc_board_seq}+1 where bName=#{bName}
+	</update>
+	
+	<select id="listOne" parameterType="String" resultType="com.test.jdbc.dto.BDto">
+		select * from board_test where bName = #{bName}
+	</select>
+</mapper>
