@@ -36,11 +36,11 @@
 		</dependency>
 				
 		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>	
+		  <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.7.0</version>
+   </dependency>
 		
 		<!-- Logging -->
 		<dependency>
@@ -153,12 +153,39 @@
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.4.0</version>
         </dependency>
+  
+ 
+        <!-- AOP -->
+   <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.7.4</version>
+   </dependency>
+
+   <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.7.4</version>
+   </dependency>
+
+   <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+   </dependency>
+   
+   <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjtools</artifactId>
+      <version>1.7.4</version>
+   </dependency>
+
+    <dependency>
+       <groupId>org.springframework</groupId>
+       <artifactId>spring-aop</artifactId>
+       <version>3.2.3.RELEASE</version>
+    </dependency>
         
-        <dependency>
-        	 <groupId>org.aspectj</groupId>
-        	 <artifactId>aspectjweaver</artifactId>
-        	 <version>1.7.4</version>
-        </dependency>
 	</dependencies>
     <build>
         <plugins>
