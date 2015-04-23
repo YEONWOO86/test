@@ -56,7 +56,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public BDto selectOne(String bName) {
-		
+		System.out.println("9");
 		return sqlSession.selectOne("com.test.jdbc.mapper.SelectMapper.listOne",bName);
 	}
 

@@ -22,7 +22,7 @@ public class BoardService {
 	public BDto selectOne(String name) {
 		System.out.println("service boardDetail()");
 			return boardDao.selectOne(name);
-		
+			
 	}
 
 //	public void upHits(int test) {
