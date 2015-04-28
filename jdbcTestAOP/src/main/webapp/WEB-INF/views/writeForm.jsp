@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -12,7 +12,6 @@
 
 
 <script type="text/javascript">
-
 $("#submit_write").click(function(){
 	$.ajax({
 		url : "board_write",
@@ -31,14 +30,11 @@ $("#submit_write").click(function(){
 		}
 	});
 });
-
 </script>
 <body>
-<div><div>ÀÌ¸§</div><div><input type="text" id="bName" name="write_bName"></div></div>
-<div><div>Á¦¸ñ</div><div><input type="text" id="bTitle" name="write_bTitle"></div></div>
-<div><div>³»¿ë</div><div><input type="text" id="bContent" name="write_bContent"></div></div>
-<input type="button" value="°í°í" id="submit_write">
+<div><div>ì´ë¦„</div><div><input type="text" id="bName" name="write_bName"></div></div>
+<div><div>ì œëª©</div><div><input type="text" id="bTitle" name="write_bTitle"></div></div>
+<div><div>ë‚´ìš©</div><div><input type="text" id="bContent" name="write_bContent"></div></div>
+<input type="button" value="ê³ ê³ " id="submit_write">
 </body>
 </html>
-
-	

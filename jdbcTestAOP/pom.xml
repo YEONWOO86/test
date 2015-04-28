@@ -34,13 +34,8 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
-		<!-- AspectJ -->
-		  <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.7.0</version>
-   </dependency>
+	
+   
 		
 		<!-- Logging -->
 		<dependency>
@@ -127,11 +122,11 @@
             <version>3.1.1.RELEASE</version>
         </dependency>
         
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-dbcp</artifactId>
             <version>7.0.47</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -157,16 +152,16 @@
  
         <!-- AOP -->
    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.7.4</version>
-   </dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjrt</artifactId>
+	<version>1.6.10</version>
+</dependency>
 
-   <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>1.7.4</version>
-   </dependency>
+<dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjweaver</artifactId>
+	<version>1.6.10</version>
+</dependency>
 
    <dependency>
       <groupId>aopalliance</groupId>
@@ -174,18 +169,73 @@
       <version>1.0</version>
    </dependency>
    
-   <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjtools</artifactId>
-      <version>1.7.4</version>
-   </dependency>
+  <dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjtools</artifactId>
+	<version>1.6.10</version>
+</dependency>
+
 
     <dependency>
-       <groupId>org.springframework</groupId>
-       <artifactId>spring-aop</artifactId>
-       <version>3.2.3.RELEASE</version>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-aop</artifactId>
+	<version>3.1.1.RELEASE</version>
+</dependency>
+  
+  
+  <!-- json -->
+
+<dependency>
+	<groupId>commons-lang</groupId>
+	<artifactId>commons-lang</artifactId>
+	<version>2.5</version>
+</dependency>
+<dependency>
+	<groupId>commons-beanutils</groupId>
+	<artifactId>commons-beanutils</artifactId>
+	<version>1.8.0</version>
+</dependency>
+<dependency>
+	<groupId>commons-collections</groupId>
+	<artifactId>commons-collections</artifactId>
+	<version>3.2.1</version>
+</dependency>
+<dependency>
+	<groupId>commons-logging</groupId>
+	<artifactId>commons-logging</artifactId>
+	<version>1.1.1</version>
+</dependency>
+<dependency>
+	<groupId>net.sf.ezmorph</groupId>
+	<artifactId>ezmorph</artifactId>
+	<version>1.0.6</version>
+</dependency>
+
+<dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.4</version>
+        <classifier>jdk15</classifier>
     </dependency>
-        
+
+<!-- security -->
+ <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+
+  
 	</dependencies>
     <build>
         <plugins>
@@ -224,6 +274,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>spring-security-tutorial</finalName>  <!-- security 관련정보-->
     </build>
        <repositories>
       <repository>

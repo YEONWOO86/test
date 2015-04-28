@@ -7,7 +7,12 @@
 	      
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/root-context.xml</param-value>
+        <param-value>
+        /WEB-INF/spring/root-context.xml
+        /WEB-INF/spring/appServlet/aop-context.xml   <!-- aop관련파일 -->
+        /WEB-INF/spring/appServlet/mybatis-context.xml <!-- 마이바피스,트랜젝션관련파일 -->
+        /WEB-INF/spring/appServlet/security-context.xml <!-- 시큐리티관련 파일 -->
+        </param-value>
     </context-param>
     
 	 
@@ -16,6 +21,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 
 	<!-- Processes application requests -->
 	<servlet>
@@ -32,6 +38,20 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+		<!-- security 필터 설정 -->
+	<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>
+      		  org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>  
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+   
 
  <filter>
         <filter-name>encoding</filter-name>

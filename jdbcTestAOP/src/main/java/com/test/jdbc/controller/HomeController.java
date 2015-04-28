@@ -1,12 +1,16 @@
-package com.test.jdbc;
+package com.test.jdbc.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.test.jdbc.dao.BoardDao;
 import com.test.jdbc.dto.BDto;
 import com.test.jdbc.service.BoardService;
 
@@ -47,18 +50,53 @@ public class HomeController {
         String formattedDate = dateFormat.format(date);
         
         model.addAttribute("serverTime", formattedDate );
-        List<BDto> vo=boardService.listAll();
-        model.addAttribute("list", vo);
+      
+        try{
+        ArrayList b_list = (ArrayList)boardService.listAll();
+        JSONObject jsonOb = new JSONObject();
+        JSONArray jsonAr = new JSONArray();
+        BDto data = null;
+      
+        for (int i = 0; i < b_list.size(); i++) {
+        	
+			data = (BDto)b_list.get(i);
+        	JSONObject obj = new JSONObject();
+        	
+        	obj.put("bName", data.getbName());
+//        	System.out.println("name = " + data.getbName());
+        	obj.put("bTitle", data.getbTitle());
+        	obj.put("bContent", data.getbContent());
+        	
+        	jsonAr.add(obj);
+//        	System.out.println(jsonAr.toString());
+        	
+        }
+//        System.out.println("1");
+        jsonOb.put("row", jsonAr);
+       
+        model.addAttribute("list",jsonOb);
         
-        return "home";
+//        System.out.println(jsonOb.toString());
+        
+        
+      /*  List<BDto> vo=boardService.listAll();
+        model.addAttribute("list", vo);
+        return "home";*/
+       return "home";
+        }catch(Exception e){
+        	e.printStackTrace();
+        }finally{
+        	return "home";
+        }
+        
     }
     
     @RequestMapping(value="/board_writeForm", method=RequestMethod.GET )
     @ResponseBody
 	public String insertForm(Model model,HttpServletRequest request,HttpSession session){
 			return "writeForm";
-		// ajax ¿¡¼­ ¹®ÀÚ°ªÀ¸·Î¸¸ ÀÎ½Ä.. ÆäÀÌÁöÀÌµ¿¾ÈµÊ. 
-			// ¹Ø¿¡¼­ writeForm ¹Þ¾Æ¼­ ÀÌµ¿ÇØÁÖ´Â Å¬·¡½º ¸¸µë..
+		// ajax ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½Î½ï¿½.. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½Èµï¿½. 
+			// ï¿½Ø¿ï¿½ï¿½ï¿½ writeForm ï¿½Þ¾Æ¼ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½Ö´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..
 	}
     @RequestMapping(value="/writeForm", method=RequestMethod.GET )
     public String insertForm1(Model model,HttpServletRequest request,HttpSession session){
@@ -81,13 +119,20 @@ public class HomeController {
 //		System.out.println(request.getParameter("bContent"));
 //		bDto.setB_read_bTitle
 		
+/*	BDto bDto = new BDto();
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("json", request.getParameter("json_data"));
+		JSONObject jsonObject = JSONObject.fromObject(mapJson);
+		System.out.println(jsonObject.toString());*/
+		
+		
 		try{
 			boardService.write(bDto);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		return "redirect:/";
 		
@@ -163,9 +208,7 @@ public class HomeController {
 			model.addAttribute("ttt", bDto);
 		}catch (Exception e){
 			e.printStackTrace();
-			System.out.println("10");
 		}
-		System.out.println("11");
 		return "selectOne";
 	}
 	

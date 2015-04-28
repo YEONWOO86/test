@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:testDB"/>
+	<property name="username" value="test"/>
+	<property name="password" value="oracle"/> 
+		
+	</bean> 
+	
+<!-- 	 SqlSessionFactory설정 --> 
+
+    <bean id="sqlSessionFactory"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" 
+                value="classpath*:com/test/jdbc/mapper/*.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.test.jdbc.controller.dto"/>
+    </bean>      
+  
+    <!-- SqlSessionTemplate설정 -->
+    <bean id="sqlSessionTemplate" 
+            class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean id="boardDao" class="com.test.jdbc.dao.BoardDaoImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate" />
+    </bean>
+    
+       <!--  트랜잭션 설정 -->
+    
+  <!--   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    	<tx:attributes>
+    		<tx:method name="public*" propagation="REQUIRED"/>
+    	</tx:attributes>
+    </tx:advice>
+    
+    <aop:config>
+    	<aop:pointcut expression="execution(* com.test.jdbc.dao.BoardDaoImpl.*(..))" id="servicePublicM"/>
+    	<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicM"/>
+    </aop:config> -->
+</beans>

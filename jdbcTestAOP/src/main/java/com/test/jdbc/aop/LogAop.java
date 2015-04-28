@@ -1,17 +1,26 @@
 package com.test.jdbc.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 
-public class LogAop {
+@Aspect
+public class LogAop{
 	
-/*	@Pointcut("execution(public * com.test.jdbc.dao.BoardDaoImpl.*(..))")
-	private void profileTarget(){
-		
+	@Pointcut("execution(* com.test.jdbc.dao.BoardDaoImpl.*(..))")
+	public void aop_Test(){	}
+	
+/*	@Before("aop_Test()")
+	public void before(JoinPoint jpo){
+		System.out.println("���Ͷ�"+ jpo.toString());
 	}*/
 	
-	
-	public Object loggerAop(ProceedingJoinPoint joinpoint) throws Throwable{
+	@Around("aop_Test()")
+	public Object loggerAop(ProceedingJoinPoint joinpoint)throws Throwable{
 		String singnatureStr = joinpoint.getSignature().toShortString();
 		System.out.println( singnatureStr + " is start.");
 		try{
@@ -19,7 +28,6 @@ public class LogAop {
 			return obj;
 		}finally{
 			System.out.println( singnatureStr + " is finished.");
-			System.out.println("end");
 		}
 	}
 }

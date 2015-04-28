@@ -10,6 +10,9 @@
 
 <script type="text/javascript">
 
+
+	
+
 	function goWriteForm(){
 		$.ajax({
 			url : "board_writeForm",
@@ -68,6 +71,20 @@
 		
 
 	}
+	
+ 	function logout() {
+		$.ajax({
+			url : "j_spring_security_logout",
+			type : "GET",
+			success : function(data){
+				alert("1");
+				$("#one").html(data);
+			}
+		
+				
+		});
+	} 
+
 </script>
 <body>
 <div id ="one">
@@ -79,12 +96,25 @@
 
 <table>
 <tr><td>이름</td><td>제목</td></tr>
-<c:forEach var="vo" items="${list }" varStatus="i">
+<%-- ${list }
+-----------
+${list.row }
+------------
+${list.row[0].bName }
+---------------
+ --%>
+ 
+
+ 
+
+<c:forEach var="vo" items="${list.row}" varStatus="i" >
     <tr bordercolor="black">
-    <td>${vo.bName }
+    <td>${vo.bName}</td> 
+    
 <%-- <a href="board_selectOne?bName=${vo.bName}">${vo.bTitle }</a> --%>
-		<td><div onclick="home_selectOne(${i.index},${vo.bName })" class="home_td">${vo.bTitle }</div></td>
-	</td>
+
+		<td><div onclick="home_selectOne(${i.index},${vo.bName})" class="home_td">${vo.bTitle}</div></td>
+	
 	</tr>
 </c:forEach>
 
@@ -93,6 +123,9 @@
 <div id="show"></div>
 <input type="button" value="삽입" onclick="goWriteForm()">
 <input type="button" value="삭제" onclick="godeleteForm()">
+<!-- <input type="button" value="로그아웃" onclick="location.href='j_spring_security_logout'" /> -->
+<input type="button" value="로그아웃" onclick="logout()" />
+<%-- <a href="<c:url value="/j_spring_security_logout" />" > Logout</a> --%>
 </div>
 </body>
 </html>
