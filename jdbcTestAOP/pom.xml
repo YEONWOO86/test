@@ -276,7 +276,7 @@
         </plugins>
         <finalName>spring-security-tutorial</finalName>  <!-- security 관련정보-->
     </build>
-       <repositories>
+       <repositories>	<!-- ojdbc 설정때 같이 해줘야한다 -->
       <repository>
           <id>mesir-repo</id>
           <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
