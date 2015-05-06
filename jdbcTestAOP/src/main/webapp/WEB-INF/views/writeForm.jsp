@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -8,33 +10,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-</head>
-
 
 <script type="text/javascript">
-$("#submit_write").click(function(){
+function aa(){
 	$.ajax({
 		url : "board_write",
 		type: "post", 
-		data :{ "write_bName" : $("#bName").val(),
-				"write_bTitle" : $("#bTitle").val(),
-				"write_bContent" : $("#bContent").val(),
+		data :{ "bName" : $("#bName").val(),
+				"bTitle" : $("#bTitle").val(),
+				"bContent" : $("#bContent").val(),
 			  },
 		success: function(data){
 			alert("1");
 			$("show").empty();
 			$("#one").html(data);
-		},
-		error : function(data){
-			alert('2');
 		}
 	});
+	
+}
+
+$("#submit_write1").click(function(){
+	alert("3");
+	
 });
 </script>
+</head>
+
+
+
 <body>
-<div><div>이름</div><div><input type="text" id="bName" name="write_bName"></div></div>
-<div><div>제목</div><div><input type="text" id="bTitle" name="write_bTitle"></div></div>
-<div><div>내용</div><div><input type="text" id="bContent" name="write_bContent"></div></div>
-<input type="button" value="고고" id="submit_write">
+<form:form commandName="bDto">
+
+
+<div><div>이름</div><div><input type="text" id="bName" name="bName"></div></div><form:errors path="bDto.bName"/> 
+<div><div>제목</div><div><input type="text" id="bTitle" name="bTitle"><form:errors path="bTitle"/> </div></div>
+<div><div>내용</div><div><input type="text" id="bContent" name="bContent"><form:errors path="bContent"/> </div></div>
+<input type="button" value="고고" id="submit_write1" onclick="aa()">
+</form:form>
+
 </body>
+
 </html>

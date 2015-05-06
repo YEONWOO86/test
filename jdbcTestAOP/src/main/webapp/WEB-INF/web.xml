@@ -12,6 +12,7 @@
         /WEB-INF/spring/appServlet/aop-context.xml   <!-- aop관련파일 -->
         /WEB-INF/spring/appServlet/mybatis-context.xml <!-- 마이바피스,트랜젝션관련파일 -->
         /WEB-INF/spring/appServlet/security-context.xml <!-- 시큐리티관련 파일 -->
+        <!-- /WEB-INF/spring/appServlet/validate-context.xml --> <!-- validate 관련파일 -->
         </param-value>
     </context-param>
     
@@ -38,7 +39,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
+	<!-- <servlet-mapping>
+	  	<servlet-name>default</servlet-name>
+	 	<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+	 	<url-pattern>*.gif</url-pattern>
+ 	</servlet-mapping> -->
+
+
+
 		<!-- security 필터 설정 -->
 	<filter>
         <filter-name>springSecurityFilterChain</filter-name>

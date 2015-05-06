@@ -1,15 +1,20 @@
 package com.test.jdbc.dto;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BDto {
 
 
-	
+	@NotEmpty(message="no empty")
 	String bName;
+	
+	@NotEmpty(message="no empty")
 	String bTitle;
+	
+	@NotEmpty(message="no empty")
 	String bContent;
 	
 	
